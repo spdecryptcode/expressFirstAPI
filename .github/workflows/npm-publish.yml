@@ -29,22 +29,8 @@ jobs:
             PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY  }}            
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          
-            #Now we have got the access of EC2 and we will start the deploy .
-            DIR="/home/ec2-user/server"
-            pm2 delete all
-            cd /home/ec2-user
-            
-            if [ ! -d $DIR ]
-            then
-              mkdir server &&
               git clone https://github.com/spdecryptcode/expressFirstAPI.git server &&
-              cd server &&
-              npm i
-            else
-              cd server
-            fi
-            
+              
             git checkout master &&
             git fetch --all &&
             git reset --hard origin/master &&
